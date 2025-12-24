@@ -1,10 +1,63 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Bree+Serif&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
 
 *{
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    font-family: var(--font1)
+    
+
 }
+
+:root {
+  --body: #f9fafb;
+  --primary: #2563eb;
+  --secondary: #f59e0b;
+  --text-color: #111827;
+  --text-hover: #1d4ed8;
+  --p-color :  #333f5098;
+   --font1: "Tenor Sans", sans-serif;
+    --font2: "Bodoni Moda", serif;;
+}
+*
+
+
+.dark {
+  --body  :  #1a1b20;
+  --primary: #323361;
+  --secondary: #0ea5e9;
+  --text-color: #f9fafb;
+   --text-hover:  #d47b06;
+   
+}
+
+/* annimation  */
+
+@keyframes wave {
+  0% { transform: rotate(0deg); }
+  20% { transform: rotate(20deg); }
+  40% { transform: rotate(-15deg); }
+  60% { transform: rotate(15deg); }
+  80% { transform: rotate(-5deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.animate-wave {
+  animation: wave 1.5s infinite;
+  transform-origin: bottom left;
+}
+
+.confirmepassword {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1; 
+  overflow: hidden
+
+}
+
+
 
