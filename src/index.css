@@ -47,9 +47,22 @@
   80% { transform: rotate(-5deg); }
   100% { transform: rotate(0deg); }
 }
+@keyframes car {
+  0% { transform: rotate(0deg); }
+  20% { transform: rotate(10deg); }
+  40% { transform: rotate(-20deg); }
+  60% { transform: rotate(15deg); }
+  80% { transform: rotate(-50deg); }
+  100% { transform: rotate(0deg); }
+}
 
 .animate-wave {
-  animation: wave 1.5s infinite;
+  animation: wave 2.5s infinite;
+  transform-origin: bottom left;
+}
+
+.animate-car {
+  animation: car 5.5s infinite;
   transform-origin: bottom left;
 }
 

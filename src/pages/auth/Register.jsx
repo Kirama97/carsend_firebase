@@ -75,32 +75,39 @@ const Register = () => {
 
   return (
   
-       <div className="w-screen h-[100vh] p-[2%] bg-gradient-to-r from-blue-50 to-green-200">
-       {/* <div className="w-screen h-[100vh] p-[2%] bg-gradient-to-r from-sky-50 to-blue-200"> */}
-          <div className="flex overflow-hidden w-full h-full bg-gradient-to-l from-neutral-50 to-green-100 rounded-md shadow-sm border-2 border-neutral-100 ">
-          {/* <div className="flex overflow-hidden w-full h-full bg-gradient-to-l from-neutral-50 to-blue-100 rounded-md shadow-sm border-2 border-neutral-100 "> */}
-              <motion.div
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 1.5 }}      
-                   className=" hidden sm:flex flex-col justify-center gap-5 md:gap-10 px-10 py-5 w-1/2 ">
-                  <div className="flex items-center gap-5 text-3xl mb-2 text-primary">
-                     <h1 className=" text-4xl md:text-4xl lg:text-6xl text-primary font-bold ">CarSend</h1>
-                     <FaCar className="animate-wave text-4xl md:text-4xl lg:text-6xl " />
-                  </div>
-                 <h3 className=' md:text-2xl lg:text-4xl max-w-lg text-textColor font-semibold '>Ton monde automobile, réuni sur une seule plateforme.</h3>
-                 <p className="text-sm md:text-md text-pretty text-pColor">Simple, rapide et fiable, elle vous permet de réaliser tous vos projets automobiles en toute confiance, avec une expérience moderne adaptée à vos besoins.</p>
-              </motion.div>
-              <div className="w-full sm:w-1/2 ">
+          <div className="w-screen h-[100vh] p-[2%] bg-gradient-to-r from-sky-50 to-blue-200">
+                   <div className=" flex overflow-hidden w-full h-full bg-gradient-to-l from-neutral-50 to-blue-100 rounded-md shadow-sm border-2 border-neutral-100 ">
+       
+                       <motion.div
+                                 initial={{ opacity: 0, x: -30 }}
+                                 animate={{ opacity: 1, x: 0 }}
+                                 transition={{ duration: 1.5 }}      
+                        className="hidden sm:flex flex-col justify-center gap-5 md:gap-10 px-10 py-5 w-1/2 ">
+                          <div  className="flex items-center gap-5 text-3xl mb-2 text-primary">
+                            <h1 className=" text-4xl md:text-4xl lg:text-6xl text-primary font-bold ">CarSend</h1>
+                            <FaCar  className="animate-wave animate-wave text-4xl md:text-4xl lg:text-6xl" />
+                          </div>
+                          <h3 className=' md:text-2xl lg:text-4xl max-w-lg text-textColor font-semibold '>Ton monde automobile, réuni sur une seule plateforme.</h3>
+                          <p className="text-sm md:text-md text-pretty text-pColor">Simple, rapide et fiable, elle vous permet de réaliser tous vos projets automobiles en toute confiance, avec une expérience moderne adaptée à vos besoins.</p>
+                       </motion.div>
+                       <div className="w-full sm:w-1/2 ">
 
-                  <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.9 }}       
-                  className=" h-full rounded-lg shadow-xl bg-white py-10  px-5 md:px-5 lg:px-10">
-
-                     <h3 className='font-bold text-2xl mb-2 text-primary'>Bienvenue</h3>
-                     <p className='text-neutral-500'>Inscrivez-vous pour accéder à la plateforme</p>
+                        <motion.div
+                           initial={{ opacity: 0, y: 30 }}
+                           animate={{ opacity: 1, y: 0 }}
+                           transition={{ duration: 0.9 }}       
+                           className=" h-full rounded-lg shadow-xl bg-white py-10  px-5 md:px-5 lg:px-10">
+                              {/* logo en sm */}
+                           <div  className="flex sm:hidden  justify-center items-center gap-5 text-3xl mb-5 text-primary">
+                              <h1 className=" text-4xl md:text-4xl lg:text-6xl text-primary font-bold ">CarSend</h1>
+                              <FaCar  className=" animate-car text-4xl md:text-4xl lg:text-6xl" />
+                            </div>
+                 
+                            <div className="flex items-center gap-5 text-3xl mb-2 text-primary">
+                              <h3 className='font-bold text-2xl '>Bienvenue </h3>
+                              <PiHandWavingFill className="hidden sm:flex animate-wave" /> 
+                              </div>
+                        <p className='text-neutral-500'>Inscrivez-vous pour accéder à la plateforme</p>
 
                      <form onSubmit={handleRegister}  className='mt-10'>
 
