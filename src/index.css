@@ -15,15 +15,17 @@
 
 :root {
   --body: #f9fafb;
-  --primary: #2563eb;
+  --primary: #289b11;
+  /* --primary: #2563eb; */
   --secondary: #f59e0b;
   --text-color: #111827;
-  --text-hover: #1d4ed8;
+  --text-hover: #186e06;;
+  /* --text-hover: #1d4ed8; */
   --p-color :  #333f5098;
    --font1: "Tenor Sans", sans-serif;
     --font2: "Bodoni Moda", serif;;
 }
-*
+* 
 
 
 .dark {

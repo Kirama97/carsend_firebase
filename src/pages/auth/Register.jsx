@@ -75,8 +75,10 @@ const Register = () => {
 
   return (
   
-       <div className="w-screen h-[100vh] p-[2%] bg-gradient-to-r from-sky-50 to-blue-200">
-          <div className="flex overflow-hidden w-full h-full bg-gradient-to-l from-neutral-50 to-blue-100 rounded-md shadow-sm border-2 border-neutral-100 ">
+       <div className="w-screen h-[100vh] p-[2%] bg-gradient-to-r from-blue-50 to-green-200">
+       {/* <div className="w-screen h-[100vh] p-[2%] bg-gradient-to-r from-sky-50 to-blue-200"> */}
+          <div className="flex overflow-hidden w-full h-full bg-gradient-to-l from-neutral-50 to-green-100 rounded-md shadow-sm border-2 border-neutral-100 ">
+          {/* <div className="flex overflow-hidden w-full h-full bg-gradient-to-l from-neutral-50 to-blue-100 rounded-md shadow-sm border-2 border-neutral-100 "> */}
               <motion.div
                   initial={{ opacity: 0, x: -30 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -204,7 +206,7 @@ const Register = () => {
                            <button type='submit' className="w-full text-sm  text-white py-2 mt-10 text-center bg-primary rounded-xl shadow-sm transition-all duration-200 hover:bg-textHover ">
                               {loading ? "Création..." : "S'inscrire"}
                            </button>
-                           <p className='text-neutral-600 mt-4 text-center' > Déjà un compte ?{" "} <NavLink to="/connexion" className="text-primary hover:textHover">connecte-toi</NavLink> </p>
+                           <p className='text-neutral-600 mt-4 text-center' > Déjà un compte ? <NavLink to="/connexion" className="text-primary hover:textHover">connecte-toi</NavLink> </p>
                
    
                      </form>
