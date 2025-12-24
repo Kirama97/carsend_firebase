@@ -23,6 +23,7 @@ const Register = () => {
   const [password ,setPassword] = useState("")
   const [confirmPassword ,setConfirmPassword] = useState("")
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
 
@@ -189,7 +190,14 @@ const Register = () => {
                                        onChange={(e) => setPassword(e.target.value)}
                                        required
                                        />
-                                    </div>                     
+                                    </div>     
+                                    <div className="flex items-center gap-3 my-3 ml-3">
+                                        <input 
+                                        type="checkbox" 
+                                        name="showpassword" 
+                                         />
+                                         <p className="text-sm text-pColor">voire le mots de passe</p>
+                                       </div>                
                               </div>
                               <div className="input flex flex-col ">
                                  <label className="confirmepassword text-sm" htmlFor="confirmpassword">Confirmé mots de passe</label>
