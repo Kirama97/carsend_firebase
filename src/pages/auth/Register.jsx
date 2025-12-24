@@ -98,7 +98,7 @@ const Register = () => {
                            transition={{ duration: 0.9 }}       
                            className=" h-full rounded-lg shadow-xl bg-white py-10  px-5 md:px-5 lg:px-10">
                               {/* logo en sm */}
-                           <div  className="flex sm:hidden  justify-center items-center gap-5 text-3xl mb-5 text-primary">
+                           <div  className="flex sm:hidden  justify-center items-center gap-5 text-3xl mb-10 text-primary">
                               <h1 className=" text-4xl md:text-4xl lg:text-6xl text-primary font-bold ">CarSend</h1>
                               <FaCar  className=" animate-car text-4xl md:text-4xl lg:text-6xl" />
                             </div>
