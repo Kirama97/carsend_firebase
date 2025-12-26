@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {auth} from "../../config/firebase"
+import {auth} from "../../config/firebase-config"
 import {createUserWithEmailAndPassword} from "firebase/auth"
 import {NavLink} from 'react-router-dom'
 
