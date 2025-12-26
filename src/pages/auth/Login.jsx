@@ -13,6 +13,10 @@ import { FaCar } from "react-icons/fa";
 
 
 const Login = () => {
+
+
+const [showPassword, setShowPassword] = useState(false);
+
   return (
     
          <div className="w-screen h-[100vh] p-[2%] bg-gradient-to-r from-sky-50 to-blue-200">
@@ -79,11 +83,24 @@ const Login = () => {
   
                                       <input 
                                       className="py-2 text-sm px-3 w-full focus:outline-none"
-                                      type="password" 
+                                      type={showPassword ? "text" : "password"} 
                                       placeholder="xxxxxxx"
                                       />
                                    </div>                     
                              </div>
+                              <div className="flex items-center w-full gap-3 my-3 ml-3">
+                                        <input 
+                                        type="checkbox"        
+                                        onClick={() => setShowPassword(!showPassword)}
+                                         />
+                                      <p
+                                      
+                                       className="text-sm text-pColor cursor-pointer  select-none"
+                                       >
+                                       {showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
+                                       </p>
+
+                              </div> 
                            <button className="w-full text-sm text-white py-2 mt-10 text-center bg-primary rounded-xl shadow-sm transition-all duration-200 hover:bg-textHover ">
                               Inscription
                            </button>

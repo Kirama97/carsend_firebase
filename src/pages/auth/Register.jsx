@@ -39,6 +39,12 @@ const Register = () => {
       return;
    }
 
+   if(password.length <= 5){
+      setLoading(false);
+      toast.error("Au minimum 6 caractéres pour le mots de passe");
+      return;
+   }
+
    if(password !== confirmPassword) {
       setLoading(false);
       toast.error("Les deux mots de passe ne correspondent pas");
@@ -188,7 +194,7 @@ const Register = () => {
                                           <input 
                                           id="password"
                                           className="py-2 text-sm px-3 w-full focus:outline-none"
-                                          type="password" 
+                                          type={showPassword ? "text" : "password"} 
                                           placeholder="xxxxxxx"
                                           value={password}
                                           onChange={(e) => setPassword(e.target.value)}
@@ -205,7 +211,7 @@ const Register = () => {
                                           <input 
                                           id="confirmpassword"
                                           className="py-2 text-sm px-3 w-full focus:outline-none"
-                                          type="password" 
+                                          type={showPassword ? "text" : "password"} 
                                           placeholder="xxxxxx"
                                              value={confirmPassword}
                                           onChange={(e) => setConfirmPassword(e.target.value)}
@@ -216,12 +222,18 @@ const Register = () => {
 
                               </div>
                            
-                              <div className="flex items-center gap-3 my-3 ml-3">
+                              <div className="flex items-center w-full gap-3 my-3 ml-3">
                                         <input 
-                                        type="checkbox" 
-                                        name="showpassword" 
+                                        type="checkbox"        
+                                        onClick={() => setShowPassword(!showPassword)}
                                          />
-                                         <p className="text-sm text-pColor">voire le mots de passe</p>
+                                      <p
+                                      
+                                       className="text-sm text-pColor cursor-pointer  select-none"
+                                       >
+                                       {showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
+                                       </p>
+
                                  </div> 
                            </div>
                           
