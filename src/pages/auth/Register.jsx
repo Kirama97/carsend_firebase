@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {auth , db} from "../../config/firebase"
+import {auth , db} from "../../config/firebase-config"
 import {createUserWithEmailAndPassword} from "firebase/auth"
 import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 import {NavLink ,useNavigate} from 'react-router-dom'
@@ -55,6 +55,8 @@ const Register = () => {
        await setDoc(doc(db, "users", userCredential.user.uid), {
           prenom,
           nom,
+          adresse : "",
+          profil : "",
           email,
           role: "client",
           createdAt: serverTimestamp(),
@@ -174,50 +176,55 @@ const Register = () => {
                            
                         {/* mots de passe et confirm mots de passe*/}
 
-                           <div className="grid grid-cols-2 gap-3 mt-5">
+                           <div className="">
 
-                              <div className="input flex flex-col ">
-                                 <label className="text-sm"  htmlFor="password">Mots de Passe</label>
-                                 <div className="shadow-sm mt-2 group rounded-xl px-3 overflow-hidden  flex items-center  border-2 border-neutral-200 focus-within:border-blue-300 focus-within:ring focus-within:ring-blue-200">
-                                       <MdPassword  className="text-xl text-neutral-800  group-focus-within:text-blue-500" />                      
+                              <div className="grid grid-cols-2 gap-3 mt-5 ">
 
-                                       <input 
-                                       id="password"
-                                       className="py-2 text-sm px-3 w-full focus:outline-none"
-                                       type="password" 
-                                       placeholder="xxxxxxx"
-                                       value={password}
-                                       onChange={(e) => setPassword(e.target.value)}
-                                       required
-                                       />
-                                    </div>     
-                                    <div className="flex items-center gap-3 my-3 ml-3">
+                                 <div className="input flex flex-col ">
+                                    <label className="text-sm"  htmlFor="password">Mots de Passe</label>
+                                    <div className="shadow-sm mt-2 group rounded-xl px-3 overflow-hidden  flex items-center  border-2 border-neutral-200 focus-within:border-blue-300 focus-within:ring focus-within:ring-blue-200">
+                                          <MdPassword  className="text-xl text-neutral-800  group-focus-within:text-blue-500" />                      
+
+                                          <input 
+                                          id="password"
+                                          className="py-2 text-sm px-3 w-full focus:outline-none"
+                                          type="password" 
+                                          placeholder="xxxxxxx"
+                                          value={password}
+                                          onChange={(e) => setPassword(e.target.value)}
+                                          required
+                                          />
+                                       </div>     
+                                                   
+                                 </div>
+                                 <div className="input flex flex-col ">
+                                    <label className="confirmepassword text-sm" htmlFor="confirmpassword">Confirmé mots de passe</label>
+                                    <div className="shadow-sm mt-2 group rounded-xl px-3 overflow-hidden  flex items-center   border-2 border-neutral-200 focus-within:border-blue-300 focus-within:ring focus-within:ring-blue-200">
+                                          <MdPassword  className="text-xl text-neutral-800  group-focus-within:text-blue-500" />                      
+
+                                          <input 
+                                          id="confirmpassword"
+                                          className="py-2 text-sm px-3 w-full focus:outline-none"
+                                          type="password" 
+                                          placeholder="xxxxxx"
+                                             value={confirmPassword}
+                                          onChange={(e) => setConfirmPassword(e.target.value)}
+                                          required
+                                          />
+                                       </div>                     
+                                 </div>
+
+                              </div>
+                           
+                              <div className="flex items-center gap-3 my-3 ml-3">
                                         <input 
                                         type="checkbox" 
                                         name="showpassword" 
                                          />
                                          <p className="text-sm text-pColor">voire le mots de passe</p>
-                                       </div>                
-                              </div>
-                              <div className="input flex flex-col ">
-                                 <label className="confirmepassword text-sm" htmlFor="confirmpassword">Confirmé mots de passe</label>
-                                 <div className="shadow-sm mt-2 group rounded-xl px-3 overflow-hidden  flex items-center   border-2 border-neutral-200 focus-within:border-blue-300 focus-within:ring focus-within:ring-blue-200">
-                                       <MdPassword  className="text-xl text-neutral-800  group-focus-within:text-blue-500" />                      
-
-                                       <input 
-                                       id="confirmpassword"
-                                       className="py-2 text-sm px-3 w-full focus:outline-none"
-                                       type="password" 
-                                       placeholder="xxxxxx"
-                                            value={confirmPassword}
-                                       onChange={(e) => setConfirmPassword(e.target.value)}
-                                       required
-                                       />
-                                    </div>                     
-                              </div>
-
+                                 </div> 
                            </div>
-                           
+                          
                            <button type='submit' className="w-full text-sm  text-white py-2 mt-10 text-center bg-primary rounded-xl shadow-sm transition-all duration-200 hover:bg-textHover ">
                               {loading ? "Création..." : "S'inscrire"}
                            </button>
