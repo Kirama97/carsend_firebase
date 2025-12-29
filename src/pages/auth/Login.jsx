@@ -20,16 +20,19 @@ const Login = () => {
      const [password ,setPassword] = useState("")
      const [loading, setLoading] = useState(false);
      const [showPassword, setShowPassword] = useState(false);
+     
 
 
        const navigate = useNavigate();
-     
+
+      
 
 
      const handleSignIn = (e) => {
          
       e.preventDefault();
        setLoading(true);
+      
 
         if(!email || !password ) {
              setLoading(false);
@@ -37,13 +40,16 @@ const Login = () => {
              return;
           }
 
+        
+
        try {
            signInWithEmailAndPassword(auth, email, password)
            .then((userCredential) => {
-            // const user = userCredential.user;
-            toast.success("Connexon réussie")
+            const user = userCredential.user;
+            setLoading(true);
             navigate("/accueil");
-            // console.log("utilisateur créé :", userCredential.user);
+            toast.success("Connexon réussie")
+            console.log("utilisateur créé :", userCredential.user);
          
          })
          
@@ -141,23 +147,47 @@ const Login = () => {
                                         onClick={() => setShowPassword(!showPassword)}
                                          />
                                       <p
-                                      
+                          
                                        className="text-sm text-pColor cursor-pointer  select-none"
                                        >
                                        {showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
                                        </p>
 
                               </div> 
-                           <button 
-                              className="w-full flex items-center justify-center text-sm text-white py-2 mt-10 text-center bg-primary {} rounded-xl shadow-sm transition-all duration-200 hover:bg-textHover "
-                              type ="submit"
+                              <button
+                              type="submit"
+                              disabled={loading}
+                              className={`w-full flex items-center justify-center text-sm text-white py-2 mt-10 
+                                 bg-primary rounded-xl shadow-sm transition-all duration-200 
+                                 hover:bg-textHover disabled:opacity-60 disabled:cursor-not-allowed`}
                               >
-                              <svg class="animate-spin h-5 w-5 mr-3 ..." viewBox="0 0 24 24">
-                                 ...
-                              </svg>
-                              { loading ? "chargement..." : " Connexion"}
-                           </button>
-                           <p className='text-neutral-600 mt-4 text-center' >Vous n'avez pas de compte <NavLink to="/inscription" className="text-primary hover:textHover">inscrivez-vous</NavLink> </p>
+                              {loading && (
+                                 <svg
+                                    className="animate-spin h-5 w-5 mr-3 text-white"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                 >
+                                    <circle
+                                    className="opacity-25"
+                                    cx="12"
+                                    cy="12"
+                                    r="10"
+                                    stroke="currentColor"
+                                    strokeWidth="4"
+                                    />
+                                    <path
+                                    className="opacity-75"
+                                    fill="currentColor"
+                                    d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                                    />
+                                 </svg>
+                              )}
+
+                              {loading ? "Chargement..." : "Connexion"}
+                              </button>
+
+                              <p className='text-neutral-600 mt-4 text-center' >Vous n'avez pas de compte <NavLink to="/inscription" className="text-primary hover:textHover">inscrivez-vous</NavLink> </p>
               
    
                       </form>

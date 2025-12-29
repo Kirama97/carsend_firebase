@@ -1,9 +1,13 @@
 import React from 'react'
+import Navbar from './../../composants/navbar/Navbar';
+import Hero from './../../composants/Hero/Hero';
 
 const Home = () => {
   return (
-    <div className="text-red-700 text-2xl">
-       home
+    <div className="w-full h-screen">
+       <Navbar/>
+       <Hero/>
+       
     </div>
   )
 }
