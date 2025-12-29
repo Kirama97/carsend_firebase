@@ -17,7 +17,7 @@ const Button = ({
       disabled={disabled}
       className={`
         px-3 py-1 text-white text-center bg-primary
-        hover:textHover border-none shadow-sm
+        hover:textHover border-none shadow-md
         disabled:opacity-50 disabled:cursor-not-allowed
         rounded-lg
         ${className}
