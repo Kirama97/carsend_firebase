@@ -224,12 +224,13 @@ const Register = () => {
                            
                               <div className="flex items-center w-full gap-3 my-3 ml-3">
                                         <input 
-                                        type="checkbox"        
+                                        type="checkbox"  
+                                        className="w-4 h-4  accent-primary  "      
                                         onClick={() => setShowPassword(!showPassword)}
                                          />
                                       <p
                                       
-                                       className="text-sm text-pColor cursor-pointer  select-none"
+                                       className="text-sm text-pColor cursor-pointer   select-none"
                                        >
                                        {showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
                                        </p>

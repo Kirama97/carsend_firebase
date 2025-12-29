@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import {auth} from "../../config/firebase-config"
-import {createUserWithEmailAndPassword} from "firebase/auth"
-import {NavLink} from 'react-router-dom'
+import {createUserWithEmailAndPassword ,signInWithEmailAndPassword}  from "firebase/auth"
+import {NavLink ,useNavigate} from 'react-router-dom'
 
 import { CiUser } from "react-icons/ci";
 import { MdOutlineAttachEmail } from "react-icons/md";
@@ -10,12 +10,54 @@ import { motion } from "framer-motion"
 import { FaRobot } from "react-icons/fa";
 import { PiHandWavingFill } from "react-icons/pi";
 import { FaCar } from "react-icons/fa";
+import { toast } from 'react-toastify';
+
 
 
 const Login = () => {
 
+     const [email ,setEmail] = useState("")
+     const [password ,setPassword] = useState("")
+     const [loading, setLoading] = useState(false);
+     const [showPassword, setShowPassword] = useState(false);
 
-const [showPassword, setShowPassword] = useState(false);
+
+       const navigate = useNavigate();
+     
+
+
+     const handleSignIn = (e) => {
+         
+      e.preventDefault();
+       setLoading(true);
+
+        if(!email || !password ) {
+             setLoading(false);
+             toast.error('Veuillez remplir tous les champs');
+             return;
+          }
+
+       try {
+           signInWithEmailAndPassword(auth, email, password)
+           .then((userCredential) => {
+            // const user = userCredential.user;
+            toast.success("Connexon réussie")
+            navigate("/accueil");
+            // console.log("utilisateur créé :", userCredential.user);
+         
+         })
+         
+       }catch(error) {
+          console.log(error.code, error.message);
+          toast.error(error.message);
+         } finally {
+           setLoading(false);
+         }
+        
+
+       
+     }
+
 
   return (
     
@@ -53,7 +95,7 @@ const [showPassword, setShowPassword] = useState(false);
                         </div>
                         <p className='text-neutral-500'>Connectez-vous pour acceder a la plaform</p>
   
-                   <form  className='mt-10'>
+                   <form onSubmit={handleSignIn}  className='mt-10'>
   
                     
                        {/* email */}
@@ -69,6 +111,8 @@ const [showPassword, setShowPassword] = useState(false);
                                       className="py-2 text-sm px-3 w-full focus:outline-none"
                                       type="emal" 
                                       placeholder="toi@exemple.com"
+                                      value = {email}
+                                      onChange={(e) => setEmail(e.target.value)}
                                       />
                                 </div>                     
                           </div>
@@ -85,6 +129,9 @@ const [showPassword, setShowPassword] = useState(false);
                                       className="py-2 text-sm px-3 w-full focus:outline-none"
                                       type={showPassword ? "text" : "password"} 
                                       placeholder="xxxxxxx"
+                                       value = {password}
+                                      onChange={(e) => setPassword(e.target.value)}
+
                                       />
                                    </div>                     
                              </div>
@@ -101,8 +148,14 @@ const [showPassword, setShowPassword] = useState(false);
                                        </p>
 
                               </div> 
-                           <button className="w-full text-sm text-white py-2 mt-10 text-center bg-primary rounded-xl shadow-sm transition-all duration-200 hover:bg-textHover ">
-                              Inscription
+                           <button 
+                              className="w-full flex items-center justify-center text-sm text-white py-2 mt-10 text-center bg-primary {} rounded-xl shadow-sm transition-all duration-200 hover:bg-textHover "
+                              type ="submit"
+                              >
+                              <svg class="animate-spin h-5 w-5 mr-3 ..." viewBox="0 0 24 24">
+                                 ...
+                              </svg>
+                              { loading ? "chargement..." : " Connexion"}
                            </button>
                            <p className='text-neutral-600 mt-4 text-center' >Vous n'avez pas de compte <NavLink to="/inscription" className="text-primary hover:textHover">inscrivez-vous</NavLink> </p>
               
