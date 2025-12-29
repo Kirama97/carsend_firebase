@@ -36,7 +36,7 @@ const Home = () => {
                   }
                  
                  `}>
-                   <p className='mb-3 text-lg'>{type}</p>
+                   <p className='mb-3 text-sm md:text-lg'>{type}</p>
                 </div>
               ))
             }
