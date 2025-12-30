@@ -28,7 +28,7 @@ const CarCard = ({ voiture }) => {
       </div>
 
       {/* Content */}
-      <div className="p-5 space-y-3">
+      <div className="p-3 sm:p-5 space-y-2 sm:space-y-3">
         
         {/* Marque & modèle */}
         <div>
