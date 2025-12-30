@@ -8,6 +8,7 @@ const voitures = [
   {
     id: 1,
     marque: "Toyota",
+    region:"Thies",
     modele: "Corolla",
     moteur: "Essence 1.8L",
     type: "Berline",
@@ -28,6 +29,7 @@ const voitures = [
   {
     id: 2,
     marque: "Hyundai",
+    region:"Thies",
     modele: "Elantra",
     moteur: "Hybride 2.0L",
     type: "Berline",
@@ -48,6 +50,7 @@ const voitures = [
   {
     id: 3,
     marque: "Kia",
+    region:"Thies",
     modele: "Sportage",
     moteur: "Diesel 2.0L",
     type: "SUV",
@@ -68,6 +71,7 @@ const voitures = [
   {
     id: 4,
     marque: "Peugeot",
+    region:"Thies",
     modele: "308",
     moteur: "Hybride 1.6L",
     type: "Berline",
@@ -88,6 +92,7 @@ const voitures = [
   {
     id: 5,
     marque: "Nissan",
+    region:"Thies",
     modele: "Qashqai",
     moteur: "Essence 1.3L",
     type: "SUV",
@@ -108,6 +113,7 @@ const voitures = [
   {
     id: 6,
     marque: "Toyota",
+    region:"Thies",
     modele: "RAV4",
     moteur: "Hybride 2.5L",
     type: "4x4",
@@ -128,6 +134,7 @@ const voitures = [
   {
     id: 7,
     marque: "Ford",
+    region:"Thies",
     modele: "Explorer",
     moteur: "Essence 3.0L",
     type: "4x4",
@@ -148,6 +155,7 @@ const voitures = [
   {
     id: 8,
     marque: "Mercedes",
+    region:"Thies",
     modele: "Classe C",
     moteur: "Hybride 2.0L",
     type: "Berline",
@@ -168,6 +176,7 @@ const voitures = [
   {
     id: 9,
     marque: "BMW",
+    region:"Thies",
     modele: "X5",
     moteur: "Diesel 3.0L",
     type: "4x4",
@@ -188,6 +197,7 @@ const voitures = [
   {
     id: 10,
     marque: "Renault",
+    region:"Thies",
     modele: "Kangoo",
     moteur: "Diesel 1.5L",
     type: "Berling",
@@ -208,6 +218,7 @@ const voitures = [
   {
     id: 11,
     marque: "Audi",
+    region:"Dakar",
     modele: "A4",
     moteur: "Hybride 2.0L",
     type: "Berline",
@@ -228,6 +239,7 @@ const voitures = [
   {
     id: 12,
     marque: "Volkswagen",
+      region:"Dakar",
     modele: "Golf 8",
     moteur: "Essence 1.5L",
     type: "Berline",
@@ -248,6 +260,7 @@ const voitures = [
   {
     id: 13,
     marque: "Mazda",
+    region:"Dakar",
     modele: "CX-5",
     moteur: "Essence 2.5L",
     type: "SUV",
@@ -268,6 +281,7 @@ const voitures = [
   {
     id: 14,
     marque: "Chevrolet",
+    region:"Dakar",
     modele: "Captiva",
     moteur: "Diesel 2.0L",
     type: "SUV",
@@ -288,6 +302,7 @@ const voitures = [
   {
     id: 15,
     marque: "Range Rover",
+    region:"Dakar",
     modele: "Evoque",
     moteur: "Hybride 2.0L",
     type: "4x4",
@@ -308,6 +323,7 @@ const voitures = [
   {
     id: 16,
     marque: "Dacia",
+    region:"Dakar",
     modele: "Duster",
     moteur: "Diesel 1.5L",
     type: "SUV",
@@ -328,6 +344,7 @@ const voitures = [
   {
     id: 17,
     marque: "Tesla",
+    region:"Dakar",
     modele: "Model 3",
     moteur: "Électrique",
     type: "Berline",
@@ -348,6 +365,7 @@ const voitures = [
   {
     id: 18,
     marque: "Suzuki",
+    region:"Dakar",
     modele: "Vitara",
     moteur: "Essence 1.6L",
     type: "SUV",
@@ -368,6 +386,7 @@ const voitures = [
   {
     id: 19,
     marque: "Mitsubishi",
+    region:"Dakar",
     modele: "Pajero",
     moteur: "Diesel 3.2L",
     type: "4x4",
@@ -388,6 +407,7 @@ const voitures = [
   {
     id: 20,
     marque: "Citroën",
+    region:"Dakar",
     modele: "Berlingo",
     moteur: "Diesel 1.6L",
     type: "Berling",

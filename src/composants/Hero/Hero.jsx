@@ -1,8 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import im3 from '../../assets/images/im7.jpg'
 import Button from './../Button';
 
+
+import { useCarContext } from '../../context/CarProvider';
 const Hero = () => {
+
+     const { voitures} = useCarContext()
+     const { marques , setMarques} = useState("")
+
+     const marquesDisponibles = [...new Set(voitures.map(v => v.marque))];
+
+
+     console.log(marquesDisponibles)
+
+    
+
+    
+   
   return (
     <div className=' w-full h-screen bg-cover bg-center flex items-end' style={{ backgroundImage: `url(${im3})` }}
 >
@@ -28,11 +43,14 @@ const Hero = () => {
                             focus:ring-2 focus:ring-primary
                             focus:border-primary
                         "
+                        value={marques}
+                        onChange={(e) => setMarques(e.target.value)}
                         >
-                        <option value="">Choisir une marque</option>
-                        <option value="1">Option 1</option>
-                        <option value="2">Option 2</option>
-                        <option value="3">Option 3</option>
+                        <option value="">Toutes les marques</option>
+                        {marquesDisponibles.map((ma, index) => (
+                          <option key={index} value={ma}>{ma}</option>
+                        ))}
+                       
                         </select>
                 </div>
                 <div className="px-3">

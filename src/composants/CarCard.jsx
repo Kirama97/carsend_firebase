@@ -18,6 +18,12 @@ const CarCard = ({ voiture }) => {
           ${voiture.disponible ? "bg-green-500 text-white" : "bg-red-500 text-white animate-pulse"}`}>
           {voiture.disponible ? "Disponible" : "Réservé"}
       </span>
+      <span className={`px-2 py-1 rounded-full text-xs font-bold absolute bottom-3 left-3
+         ${voiture.region === "Thies" ? "bg-yellow-500 text-white" : "bg-orange-500 text-white animate-pulse"}`}>
+          {voiture.region === "Thies" ? " 🏳️ Thies" : " 🏳️ Dakar"}
+      </span>
+
+    
 
       </div>
 
