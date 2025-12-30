@@ -34,7 +34,9 @@ const Home = () => {
     <div className="w-full h-full z-10">
       <Hero />
       <Conteneur>
-        <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:justify-between mb-5">
+
+        {/* button filter */}
+        <div className="flex  flex-col items-center gap-y-5 sm:flex-row sm:items-center gap-3 sm:justify-between my-10">
           
           {/* Filtre type */}
           <div className="flex flex-wrap gap-2 justify-start sm:justify-start">
