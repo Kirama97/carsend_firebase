@@ -4,7 +4,7 @@ import Button from './../Button';
 
 const Hero = () => {
   return (
-    <div className='w-full h-screen bg-cover bg-center flex items-end' style={{ backgroundImage: `url(${im3})` }}
+    <div className=' w-full h-screen bg-cover bg-center flex items-end' style={{ backgroundImage: `url(${im3})` }}
 >
     <div className="w-full max-sm:h-[80vh] bg-neutral-900/40 backdrop-blur-sm  flex flex-col  py-10 gap-3  px-[7%] md:px-[10%] ">
        

@@ -3,12 +3,15 @@ import Register from './pages/auth/Register'
 import Login from './pages/auth/Login'
 import Home from './pages/home/Home'
 import CarProvider from './context/CarProvider'
+import React from 'react'
+import Navbar from './composants/navbar/Navbar';
 
 
 function App() {
   return (
     <BrowserRouter>
        <CarProvider>
+         <Navbar/>
         <Routes>
           
           <Route path="/accueil" element={<Home/>} />
