@@ -18,12 +18,13 @@ const Home = () => {
 
   // Optimisation du filtrage avec useMemo
   const voituresFiltrer = useMemo(() => {
-    return voitures
-      .filter(v => typeVoiture === "Tout" ? true : v.type === typeVoiture)
-      .filter(v =>
-        voitureDisponible === "Disponible" ? v.disponible === true : v.disponible === false
-      );
-  }, [voitures, typeVoiture, voitureDisponible]);
+  return voitures.filter(v => {
+    const typeOk = typeVoiture === "Tout" || v.type === typeVoiture;
+    const dispoOk = voitureDisponible === "Disponible" ? v.disponible === true : v.disponible === false;
+    return typeOk && dispoOk;
+  });
+}, [voitures, typeVoiture, voitureDisponible]);
+
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 1000);
@@ -82,6 +83,7 @@ const Home = () => {
           }
         </div>
       </Conteneur>
+      
     </div>
   );
 };

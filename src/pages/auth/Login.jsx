@@ -67,7 +67,7 @@ const Login = () => {
 
   return (
     
-         <div className="w-screen h-[100vh] p-[2%] bg-gradient-to-r from-sky-50 to-blue-200">
+         <div className="w-screen h-[90vh] mt-[10vh] p-[2%] bg-gradient-to-r from-sky-50 to-blue-200">
             <div className=" flex overflow-hidden w-full h-full bg-gradient-to-l from-neutral-50 to-blue-100 rounded-md shadow-sm border-2 border-neutral-100 ">
 
                 <motion.div

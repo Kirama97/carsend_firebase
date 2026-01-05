@@ -1,6 +1,8 @@
 import { FaCarSide, FaCogs, FaGasPump } from "react-icons/fa";
+import React from 'react';
 
-const CarCard = ({ voiture }) => {
+
+const CarCard = React.memo(({ voiture }) => {
   return (
     <div className="group bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer">
       
@@ -22,8 +24,6 @@ const CarCard = ({ voiture }) => {
          ${voiture.region === "Thies" ? "bg-yellow-500 text-white" : "bg-orange-500 text-white animate-pulse"}`}>
           {voiture.region === "Thies" ? " 🏳️ Thies" : " 🏳️ Dakar"}
       </span>
-
-    
 
       </div>
 
@@ -67,7 +67,7 @@ const CarCard = ({ voiture }) => {
 
 
   );
-};
+});
 
 export default CarCard;
 
