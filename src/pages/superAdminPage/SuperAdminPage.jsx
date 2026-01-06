@@ -1,16 +1,13 @@
-import React from 'react'
-import NavSuper from '../../composants/SuperAdmin/superNav/NavSuper';
-import { Outlet } from 'react-router-dom';
-import { ToastContainer } from "react-toastify";
+import { Outlet } from "react-router-dom";
+import NavbarSuper from "../../composants/SuperAdmin/superNav/NavSuper";
 
 const SuperAdminPage = () => {
   return (
-    <div>
-       <NavSuper/>
-       <Outlet />
-       <ToastContainer />
-    </div>
-  )
-}
+    <>
+      <NavbarSuper />
+      <Outlet />
+    </>
+  );
+};
 
-export default SuperAdminPage
+export default SuperAdminPage;

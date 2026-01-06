@@ -73,7 +73,7 @@ const Login = () => {
 
   return (
     
-         <div className="w-screen h-[90vh] mt-[10vh] p-[2%] bg-gradient-to-r from-sky-50 to-blue-200">
+         <div className="w-screen h-[100vh]  p-[2%] bg-gradient-to-r from-sky-50 to-blue-200">
             <div className=" flex overflow-hidden w-full h-full bg-gradient-to-l from-neutral-50 to-blue-100 rounded-md shadow-sm border-2 border-neutral-100 ">
 
                 <motion.div
@@ -163,7 +163,8 @@ const Login = () => {
                               <button
                               type="submit"
                               disabled={loading}
-                              className={`w-full flex items-center justify-center text-sm text-white py-2 mt-10 
+                              
+                              className={`w-full flex  items-center justify-center text-sm text-white py-2 mt-10 
                                  bg-primary rounded-xl shadow-sm transition-all duration-200 
                                  hover:bg-textHover disabled:opacity-60 disabled:cursor-not-allowed`}
                               >

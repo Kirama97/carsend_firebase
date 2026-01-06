@@ -1,16 +1,13 @@
-import React from 'react'
-import NavAdmin from '../../composants/Admin/adminNavbar/NavAdmin';
-import { Outlet } from 'react-router-dom';
-import { ToastContainer } from "react-toastify";
+import { Outlet } from "react-router-dom";
+import NavbarAdmin from "../../composants/Admin/adminNavbar/NavAdmin";
 
 const AdminPage = () => {
   return (
-    <div>
-       <NavAdmin/>
-       <Outlet></Outlet>
-        <ToastContainer />
-    </div>
-  )
-}
+    <>
+      <NavbarAdmin />
+      <Outlet />
+    </>
+  );
+};
 
-export default AdminPage
+export default AdminPage;

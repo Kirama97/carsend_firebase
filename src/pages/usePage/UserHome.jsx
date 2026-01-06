@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import Navbar from '../../composants/User/navbar/Navbar';
+
 import Hero from '../../composants/Hero/Hero';
 import Conteneur from '../../composants/Conteneur';
 import CarCard from '../../composants/CarCard';
 import CarSkeleton from '../../composants/CarSkeleton';
 import { useCarContext } from '../../context/CarProvider';
+import Navbar from './../../composants/User/navbar/Navbar';
 
 const UserHome = () => {
   const { voitures } = useCarContext();
@@ -33,6 +34,7 @@ const UserHome = () => {
 
   return (
     <div className="w-full h-full z-10">
+      <Navbar></Navbar>
       <Hero />
       <Conteneur>
 

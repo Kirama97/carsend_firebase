@@ -64,7 +64,7 @@ const Register = () => {
           adresse : "",
           profil : "",
           email,
-          role: "client",
+          role: "UTILISATEUR_STANDARD",
           createdAt: serverTimestamp(),
        });
        
@@ -84,7 +84,7 @@ const Register = () => {
 
   return (
   
-          <div className="w-screen h-[90vh] mt-[10vh] p-[2%] bg-gradient-to-r from-sky-50 to-blue-200">
+          <div className="w-screen h-[100vh]  p-[2%] bg-gradient-to-r from-sky-50 to-blue-200">
                    <div className=" flex overflow-hidden w-full h-full bg-gradient-to-l from-neutral-50 to-blue-100 rounded-md shadow-sm border-2 border-neutral-100 ">
        
                        <motion.div
@@ -238,7 +238,10 @@ const Register = () => {
                                  </div> 
                            </div>
                           
-                           <button type='submit' className="w-full text-sm  text-white py-2 mt-10 text-center bg-primary rounded-xl shadow-sm transition-all duration-200 hover:bg-textHover ">
+                           <button
+                            type='submit' 
+                            disabled={loading}
+                            className="w-full text-sm  disabled:opacity-60 disabled:cursor-not-allowed text-white py-2 mt-10 text-center bg-primary rounded-xl shadow-sm transition-all duration-200 hover:bg-textHover ">
                               {loading ? "Création..." : "S'inscrire"}
                            </button>
                            <p className='text-neutral-600 mt-4 text-center' > Déjà un compte ? <NavLink to="/connexion" className="text-primary hover:textHover">connecte-toi</NavLink> </p>

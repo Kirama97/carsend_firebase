@@ -12,68 +12,73 @@ import UserHome from './pages/usePage/UserHome'
 import AdminHome from './pages/adminPage/AdminHome';
 import SuperHome from './pages/superAdminPage/superHome'
 import CarProvider from './context/CarProvider';
+import Reservation from './pages/usePage/Reservation';
+import UserProfil from './pages/usePage/UserProfil';
+import AuthProvider from './context/AuthProvider';
 
 
 
 
 
 
-const router = createBrowserRouter( [
 
-    // { path: "/", element: <Home /> },
-    { path: "/", element: <Login /> },
-    { path: "/connexion", element: <Login /> },
-    { path: "/inscription", element: <Register /> },
-    { path: "*", element: <NotFoundPage /> },
-    
+const router = createBrowserRouter([
+  { path: "/", element: <Login /> },
+  { path: "/connexion", element: <Login /> },
+  { path: "/inscription", element: <Register /> },
 
-    {
-      path: "/",
-      element: (
-        <ProtectionRoute allowedRoles={["UTILISATEUR_STANDARD"]}>
-          <UserPage />
-        </ProtectionRoute>
-      ),
-      children: [
-        { path: "accueil", element: <UserHome /> },
-        // { path: "historique", element: <Historique /> },
-        // { path: "profil", element: <Profil /> },
-      ],
-    },
   {
-      path:"/admin",
-      element : (
-        <ProtectionRoute  allowedRoles={["ADMIN", "SUPERADMIN"]}>
-            <AdminPage/>
-        </ProtectionRoute>
-      ),
-      children : [
-        { path: "home", element: <AdminHome /> },
-        // { path: "utilisateur", element: <Utilisateurs /> },
-        // { path: "profil", element: <Profil_admin /> },
-      ]
+    path: "/",
+    element: (
+      <ProtectionRoute allowedRoles={["UTILISATEUR_STANDARD"]}>
+        <UserPage />
+      </ProtectionRoute>
+    ),
+    children: [
+      { path: "accueil", element: <UserHome /> },
+      { path: "profil", element: <UserProfil /> },
+      { path: "reservation", element: <Reservation /> },
+    ],
+  },
 
-    },
-    {
+  {
+    path: "/admin",
+    element: (
+      <ProtectionRoute allowedRoles={["ADMIN", "SUPERADMIN"]}>
+        <AdminPage />
+      </ProtectionRoute>
+    ),
+    children: [
+      { path: "home", element: <AdminHome /> },
+    ],
+  },
+
+  {
     path: "/superadmin",
     element: (
-      <ProtectionRoute allowedRoles={["SUPERADMIN"]} >
+      <ProtectionRoute allowedRoles={["SUPERADMIN"]}>
         <SuperAdminPage />
       </ProtectionRoute>
     ),
     children: [
       { path: "home", element: <SuperHome /> },
-      // { path: "admins", element: <GestionAdmins /> },
     ],
-  }
+  },
 
-])
+  { path: "*", element: <NotFoundPage /> },
+]);
+
 
 function App() {
   return (
-        <CarProvider>
-           <RouterProvider router={router} />
-       </CarProvider>
+      
+    <AuthProvider>
+      <CarProvider>
+        <RouterProvider router={router} />
+      </CarProvider>
+    </AuthProvider>
+ 
+     
   )
 
   
