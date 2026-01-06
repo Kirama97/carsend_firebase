@@ -34,7 +34,7 @@ const UserHome = () => {
 
   return (
     <div className="w-full h-full z-10">
-      <Navbar></Navbar>
+      {/* <Navbar></Navbar> */}
       <Hero />
       <Conteneur>
 

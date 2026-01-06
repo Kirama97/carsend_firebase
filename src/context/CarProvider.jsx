@@ -432,17 +432,18 @@ const cars = [
   useEffect(() => {
     const fetchCars = async () => {
       
-      setVoitures(cars);
+      setVoitures(cars); 
       
     };
     fetchCars();
   }, []);
 
 
+const NavActive = ({ isActive }) => isActive ? "text-primary" : "text-textColor";
 
   
   return (
-    <CarContext.Provider value={{ voitures }}>
+    <CarContext.Provider value={{ voitures ,NavActive }}>
       {children}
     </CarContext.Provider>
   )

@@ -13,6 +13,7 @@ import AdminHome from './pages/adminPage/AdminHome';
 import SuperHome from './pages/superAdminPage/superHome'
 import CarProvider from './context/CarProvider';
 import Reservation from './pages/usePage/Reservation';
+import Parking from './pages/usePage/Parking';
 import UserProfil from './pages/usePage/UserProfil';
 import AuthProvider from './context/AuthProvider';
 
@@ -37,7 +38,8 @@ const router = createBrowserRouter([
     children: [
       { path: "accueil", element: <UserHome /> },
       { path: "profil", element: <UserProfil /> },
-      { path: "reservation", element: <Reservation /> },
+      { path: "reservations", element: <Reservation /> },
+      { path: "parking", element: <Parking /> },
     ],
   },
 
