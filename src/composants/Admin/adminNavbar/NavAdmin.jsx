@@ -1,8 +1,8 @@
-import React from 'react';
-import Button from './../Button';
+import React from 'react'
+import Button from '../../Button';
 import {NavLink } from 'react-router-dom'
 
-const Navbar = () => {
+const NavAdmin = () => {
   return (
     <nav className="z-50 w-full fixed top-0 right-0 bg-neutral-50/80 backdrop-blur-sm flex items-center justify-between py-3 sm:py-5 px-6 md:px-[10%] shadow-md">
       <NavLink to="/accueil" className="font-bold text-lg md:text-2xl text-textColor">carsend</NavLink>
@@ -16,9 +16,7 @@ const Navbar = () => {
         </Button>
       </div>
     </nav>
-  );
-};
+  )
+}
 
-export default Navbar;
-
-
+export default NavAdmin

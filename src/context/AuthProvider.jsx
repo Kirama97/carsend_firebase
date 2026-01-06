@@ -1,51 +1,66 @@
-import { onAuthStateChanged, updateCurrentUser } from 'firebase/auth';
-import React, { createContext ,useContext , useEffect , useState} from 'react'
-import { auth, db } from '../config/firebase-config';
-import { doc, getDoc } from 'firebase/firestore';
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth, db } from "../config/firebase-config";
+import { doc, getDoc } from "firebase/firestore";
 
+const AuthContext = createContext(null);
 
-const AuthContext = createContext();
+const ROLES = ["UTILISATEUR_STANDARD", "ADMIN", "SUPERADMIN"];
 
-const AuthProvider = ({children}) => {
+const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const [user , setUser] = useState()
-  const [loading , setLoading] = useState()
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      try {
+        if (!currentUser) {
+          setUser(null);
+          setLoading(false);
+          return;
+        }
 
-
-  useEffect(() =>{
-
-   
-    const utlisateurConnecter = onAuthStateChanged(auth, async (currentUser) => {
-      if (currentUser) {
         const docRef = doc(db, "users", currentUser.uid);
         const docSnap = await getDoc(docRef);
-        const userData = docSnap.exists() ? docSnap.data() : { role: "UTILISATEUR_STANDARD" };
-        setUser({   
-           uid: currentUser.uid,
-           email: currentUser.email,
-           role: userData.role
-           });
-      } else {
+
+        let role = "UTILISATEUR_STANDARD";
+
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          if (ROLES.includes(data.role)) {
+            role = data.role;
+          }
+        }
+
+        setUser({
+          uid: currentUser.uid,
+          email: currentUser.email,
+          role,
+        });
+      } catch (error) {
+        console.error("Erreur AuthContext :", error);
         setUser(null);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
-    })
+    });
 
-    return () => utlisateurConnecter();
-
-
-  },[]);
-
-
+    return () => unsubscribe();
+  }, []);
 
   return (
-    <AuthContext.Provider value={{user , loading}}>
+    <AuthContext.Provider value={{ user, loading }}>
       {children}
     </AuthContext.Provider>
-  )
-}
+  );
+};
 
-export const useAuth = () => useContext(AuthContext);
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error("useAuth doit être utilisé dans AuthProvider");
+  }
+  return context;
+};
 
-export default AuthProvider
- 
+export default AuthProvider;

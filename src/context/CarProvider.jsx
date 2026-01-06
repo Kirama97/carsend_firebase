@@ -1,10 +1,12 @@
-import React, { createContext, useContext } from 'react'
+import React, { createContext, useContext , useState , useEffect } from 'react'
 
 const CarContext = createContext()
 
 const CarProvider = ({ children }) => {
 
-const voitures = [
+  const [voitures , setVoitures] = useState([])
+
+const cars = [
   {
     id: 1,
     marque: "Toyota",
@@ -427,6 +429,14 @@ const voitures = [
   }
 ];
 
+  useEffect(() => {
+    const fetchCars = async () => {
+      
+      setVoitures(cars);
+      
+    };
+    fetchCars();
+  }, []);
 
 
 

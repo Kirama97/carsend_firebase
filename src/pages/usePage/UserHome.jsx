@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import Navbar from './../../composants/navbar/Navbar';
-import Hero from './../../composants/Hero/Hero';
-import Conteneur from './../../composants/Conteneur';
-import { useCarContext } from '../../context/CarProvider';
+import Navbar from '../../composants/User/navbar/Navbar';
+import Hero from '../../composants/Hero/Hero';
+import Conteneur from '../../composants/Conteneur';
 import CarCard from '../../composants/CarCard';
 import CarSkeleton from '../../composants/CarSkeleton';
+import { useCarContext } from '../../context/CarProvider';
 
-const Home = () => {
+const UserHome = () => {
   const { voitures } = useCarContext();
   const [loading, setLoading] = useState(true);
 
@@ -86,6 +86,6 @@ const Home = () => {
       
     </div>
   );
-};
+}
 
-export default Home;
+export default UserHome

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const SuperAdminPage = () => {
+const SuperHome = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const SuperAdminPage = () => {
   )
 }
 
-export default SuperAdminPage
+export default SuperHome

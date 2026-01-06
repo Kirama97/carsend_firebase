@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {auth} from "../../config/firebase-config"
 import {createUserWithEmailAndPassword ,signInWithEmailAndPassword}  from "firebase/auth"
 import {NavLink ,useNavigate} from 'react-router-dom'
@@ -11,6 +11,8 @@ import { FaRobot } from "react-icons/fa";
 import { PiHandWavingFill } from "react-icons/pi";
 import { FaCar } from "react-icons/fa";
 import { toast } from 'react-toastify';
+import { useAuth } from '../../context/AuthProvider';
+
 
 
 
@@ -18,51 +20,55 @@ const Login = () => {
 
      const [email ,setEmail] = useState("")
      const [password ,setPassword] = useState("")
-     const [loading, setLoading] = useState(false);
+     const [loadingBtn, setLoadingBtn] = useState(false);
      const [showPassword, setShowPassword] = useState(false);
      
-
-
        const navigate = useNavigate();
+       const { user , loading} = useAuth()
+
+
+      useEffect(() => {
+          if(!loading && user) {
+            const routes = {
+
+               UTILISATEUR_STANDARD: "/accueil",
+               ADMIN: "/admin/home",
+               SUPERADMIN: "/superadmin/home",           
+            };
+
+            navigate(routes[user.role] , {replace :true});
+          }
+      } , [user , loading , navigate]);
+
+
 
       
-
-
-     const handleSignIn = (e) => {
-         
-      e.preventDefault();
-       setLoading(true);
-      
+     const handleSignIn =  async (e) => {
+          
+        e.preventDefault()
 
         if(!email || !password ) {
-             setLoading(false);
-             toast.error('Veuillez remplir tous les champs');
-             return;
-          }
+         toast.error("Veuillez remplir tous les champs")
+         return ;
+        }
 
-        
+        try {
 
-       try {
-           signInWithEmailAndPassword(auth, email, password)
-           .then((userCredential) => {
-            const user = userCredential.user;
-            setLoading(true);
-            navigate("/accueil");
-            toast.success("Connexon réussie")
-            console.log("utilisateur créé :", userCredential.user);
+          setLoadingBtn(true);
+          await signInWithEmailAndPassword(auth , email, password);
+          toast.success("connexion réussi");
+
          
-         })
-         
-       }catch(error) {
-          console.log(error.code, error.message);
-          toast.error(error.message);
-         } finally {
-           setLoading(false);
-         }
-        
+        } catch (error) {
+          console.log(error)
+           toast.error("Email ou mots de passe incorrect");
+        } finally {
+          setLoadingBtn(false)
+        }
 
+   
        
-     }
+     };
 
 
   return (
@@ -184,10 +190,15 @@ const Login = () => {
                                  </svg>
                               )}
 
-                              {loading ? "Chargement..." : "Connexion"}
+                              {loadingBtn? "Chargement..." : "Connexion"}
                               </button>
 
-                              <p className='text-neutral-600 mt-4 text-center' >Vous n'avez pas de compte <NavLink to="/inscription" className="text-primary hover:textHover">inscrivez-vous</NavLink> </p>
+                               <p className="text-center text-sm text-neutral-600 mt-4">
+                                 Pas de compte ?{" "}
+                                 <NavLink to="/inscription" className="text-primary">
+                                    Inscrivez-vous
+                                 </NavLink>
+                              </p>
               
    
                       </form>
