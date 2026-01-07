@@ -6,6 +6,7 @@ import { FaUser } from "react-icons/fa";
 import { useAuth } from '../../../context/AuthProvider';
 import { toast } from 'react-toastify';
 import { useCarContext } from '../../../context/CarProvider';
+import logo from '../../../assets/images/logo.png'
 
 
 const Navbar = () => {
@@ -28,7 +29,9 @@ const Navbar = () => {
    
   return (
     <nav className="z-50 w-full fixed top-0 right-0 bg-neutral-50/80 backdrop-blur-sm flex items-center justify-between py-3 sm:py-5 px-6 md:px-[10%] shadow-md">
-      <NavLink to="/accueil" className="font-bold text-lg md:text-2xl text-textColor">carsend</NavLink>
+      <NavLink to="/accueil">
+        <img className='h-7 w-30 sm:h-10  sm:w-30' src={logo} alt="" srcset="" />
+      </NavLink>
        <div className="sm:flex items-center gap-10 hidden ">
          <NavLink to="/accueil" className={NavActive}>Accueil</NavLink>
          <NavLink to="/parking" className={NavActive}>Parking</NavLink>
