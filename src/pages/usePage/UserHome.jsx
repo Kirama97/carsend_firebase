@@ -36,10 +36,10 @@ const UserHome = () => {
   }, []);
 
   return (
-    <div className="w-full h-full z-10">
+    <div className="w-full h-full z-10 ">
       {/* <Navbar></Navbar> */}
       <Hero />
-      <Conteneur>
+      <Conteneur className=" ">
 
         {/* button filter */}
         <div className="flex  flex-col items-center gap-y-5 sm:flex-row sm:items-center gap-3 sm:justify-between my-10">
@@ -92,17 +92,21 @@ const UserHome = () => {
 
         {/* section 2 */}
         <Conteneur  className='' >
-            <h2 className='text-4xl sm:text-4xl md:text-7xl font-bold  text-primary my-10 text-center  sm:text-right p-3 mb-[10%] '>ON VOUS DONNE LE BONHEUR</h2>
-            <div className=" sm:h-[90vh] gap-5  flex-col sm:flex-row items-center ">
-               <div className="w-full md:w-1/2  md:h-full">
+           <h2 className="
+            text-4xl sm:text-4xl md:text-6xl font-bold bg-gradient-to-b from-primary to-neutral-50 bg-clip-text text-transparent my-10 text-center p-3 mb-[10%]">
+            ON VOUS DONNE LE BONHEUR
+          </h2>
+
+            <div className=" sm:h-[90vh] gap-5  flex flex-col sm:flex-row  ">
+               <div className="w-full sm:w-1/2  sm:h-full">
                <h2 className="text-2xl sm:text-4xl max-w-100 font-bold">Reserver Votre Voiture <br /> en Tout Securité</h2>
                <p className='text-pColor md:max-w-xl mt-10 text-sm'>Location de voitures modernes et fiables
                   Réservez facilement à des prix avantageux
                   Confort, sécurité et liberté pour tous vos déplacements</p>
             </div>
-            <div className="relative w-full md:w-1/2 flex items-center justify-center max-sm:mt-10  h-full">
-              <IoNuclearOutline className='animate-spin absolute text-primary animate-ping h-5 w-5 sm:h-20 sm:w-20 top-0 left-5 ' />
-              <IoNuclearOutline className='animate-spin absolute text-primary animate-ping bottom-0 h-5 w-5 sm:h-20 sm:w-20 bottom-0 right-5 ' />
+            <div className="relative w-full sm:w-1/2 flex items-center justify-center max-sm:mt-10  h-full">
+              <IoNuclearOutline className='animate-spin absolute text-primary  h-5 w-5 sm:h-20 sm:w-20 top-0 left-5 ' />
+              <IoNuclearOutline className='animate-spin absolute text-primary   h-5 w-5 sm:h-20 sm:w-20 bottom-0 right-5 ' />
             
               <img className='max-sm:w-full max-sm:h-full' src={image_pub} alt="" srcset="" />
            </div>

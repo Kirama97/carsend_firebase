@@ -16,6 +16,7 @@ import Reservation from './pages/usePage/Reservation';
 import Parking from './pages/usePage/Parking';
 import UserProfil from './pages/usePage/UserProfil';
 import AuthProvider from './context/AuthProvider';
+import DetailAnnonce from './pages/usePage/DetailAnnonce';
 
 
 
@@ -40,6 +41,7 @@ const router = createBrowserRouter([
       { path: "profil", element: <UserProfil /> },
       { path: "reservations", element: <Reservation /> },
       { path: "parking", element: <Parking /> },
+      { path: "annonce/:id", element: <DetailAnnonce /> },
     ],
   },
 

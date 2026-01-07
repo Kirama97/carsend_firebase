@@ -1,8 +1,13 @@
 import { FaCarSide, FaCogs, FaGasPump } from "react-icons/fa";
 import React from 'react';
+import { useNavigate } from "react-router-dom";
+
 
 
 const CarCard = React.memo(({ voiture }) => {
+
+  const navigate = useNavigate()
+   
   return (
     <div className="group bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer">
       
@@ -59,7 +64,9 @@ const CarCard = React.memo(({ voiture }) => {
         </div>
 
         {/* Button */}
-        <button className=" max-sm:hidden w-full mt-4 bg-primary max-sm:text-sm text-white py-2 rounded-xl  hover:bg-opacity-90 transition">
+        <button
+         onClick={() => navigate(`/annonce/${voiture.id}`) }
+         className=" max-sm:hidden w-full mt-4 bg-primary max-sm:text-sm text-white py-2 rounded-xl  hover:bg-opacity-90 transition">
           Voir détails
         </button>
       </div>
