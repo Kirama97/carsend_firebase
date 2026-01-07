@@ -100,7 +100,7 @@ const DetailAnnonce = () => {
       <Conteneur className="grid grid-cols-3 gap-6 py-10">
 
         {/* ===== GAUCHE ===== */}
-        <div className="col-span-2 space-y-6">
+        <div className=" col-span-2 space-y-6">
 
           {/* Galerie */}
           <div className="grid grid-cols-4 gap-3 bg-neutral-900/40 p-4 rounded-xl overflow-x-auto">
@@ -230,7 +230,7 @@ const DetailAnnonce = () => {
         </div>
 
         {/* ===== DROITE ===== */}
-        <div className="col-span-1 bg-neutral-900/40 rounded-xl p-6 h-fit sticky top-28">
+        <div className="  max-md:hidden col-span-1 bg-neutral-900/40 rounded-xl p-6 h-fit sticky top-28">
           <h3 className="text-xl font-bold text-white mb-4">
             Réservation
           </h3>

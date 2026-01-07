@@ -9,7 +9,7 @@ const CarCard = React.memo(({ voiture }) => {
   const navigate = useNavigate()
    
   return (
-    <div className="group bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer">
+    <div  onClick={() => navigate(`/annonce/${voiture.id}`) } className="group bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer">
       
       {/* Image */}
       <div className="relative h-[100px] sm:h-52 overflow-hidden">
