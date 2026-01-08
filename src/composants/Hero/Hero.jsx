@@ -6,10 +6,10 @@ import Button from './../Button';
 import { useCarContext } from '../../context/CarProvider';
 const Hero = () => {
 
-     const { voitures} = useCarContext()
+     const { annonces} = useCarContext()
      const { marques , setMarques} = useState("")
 
-     const marquesDisponibles = [...new Set(voitures.map(v => v.marque))];
+     const marquesDisponibles = [...new Set(annonces.map(v => v.marque))];
 
 
      console.log(marquesDisponibles)

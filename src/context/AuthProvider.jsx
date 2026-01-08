@@ -42,6 +42,8 @@ const AuthProvider = ({ children }) => {
           email: currentUser.email,
           role,
         });
+
+        console.log(user)
       } catch (error) {
         console.error("Erreur AuthContext :", error);
         setUser(null);

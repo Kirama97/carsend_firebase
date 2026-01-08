@@ -11,7 +11,7 @@ import { IoNuclearOutline } from "react-icons/io5";
 
 
 const UserHome = () => {
-  const { voitures } = useCarContext();
+  const { annonces } = useCarContext();
   const [loading, setLoading] = useState(true);
 
   const [typeVoiture, setTypeVoiture] = useState('Tout');
@@ -22,12 +22,12 @@ const UserHome = () => {
 
   // Optimisation du filtrage avec useMemo
   const voituresFiltrer = useMemo(() => {
-  return voitures.filter(v => {
+  return annonces.filter(v => {
     const typeOk = typeVoiture === "Tout" || v.type === typeVoiture;
     const dispoOk = voitureDisponible === "Disponible" ? v.disponible === true : v.disponible === false;
     return typeOk && dispoOk;
   });
-}, [voitures, typeVoiture, voitureDisponible]);
+}, [annonces, typeVoiture, voitureDisponible]);
 
 
   useEffect(() => {
@@ -84,7 +84,7 @@ const UserHome = () => {
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
           {loading
             ? Array.from({ length: 8 }).map((_, i) => <CarSkeleton key={i} />)
-            : voituresFiltrer.map((voiture) => <CarCard key={voiture.id} voiture={voiture} />)
+            : voituresFiltrer.map((voiture) => <CarCard key={voiture.id} annonce={voiture} />)
           }
         </div>
     

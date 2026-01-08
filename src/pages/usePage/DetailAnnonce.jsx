@@ -1,73 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useParams, NavLink } from 'react-router-dom'
 import Conteneur from '../../composants/Conteneur'
 import { BsPinMap } from "react-icons/bs"
 import Button from '../../composants/Button'
 import kira from '../../assets/images/kira.png'
 import { useCarContext } from '../../context/CarProvider'
-import { 
-  FaGasPump, 
-  FaCogs, 
-  FaTachometerAlt, 
-  FaPalette 
-} from "react-icons/fa";
+import {  FaGasPump, FaCogs, FaTachometerAlt, FaPalette } from "react-icons/fa";
+import ReservationForm from '../../composants/User/Reservation/ReservationForm'
+
 
 
 const DetailAnnonce = () => {
 
   const { id } = useParams()
+  const [showReservation , setshowReservation] = useState(false)
 
 
-  const { voitures} = useCarContext()
-
-  const annonce = voitures.find((v) => v.id == id  );
+  const { annonces} = useCarContext()
+  const annonce = annonces.find((v) => v.id == id  );
 
   
 
-  // 🔹 Données mock (plus tard Firebase / API)
 
-  // const annonce = {
-  //   id: 1,
-  //   marque: "Toyota",
-  //   region: "Thies",
-  //   modele: "Corolla",
-  //   moteur: "Essence 1.8L",
-  //   type: "Berline",
-  //   transmission: "Automatique",
-  //   couleur: "Blanc",
-  //   nombreDeVitesses: 6,
-  //   disponible: true,
-  //   vente: false,
-  //   proprietaire: { nom: "Mamadou Ndiaye" },
-  //   fonctionnalites: [
-  //     "Climatisation",
-  //     "Bluetooth",
-  //     "Caméra de recul"
-  //   ],
-  //   images: [
-  //     "https://images.unsplash.com/photo-1617814076367-b759c7d7e738",
-  //     "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2",
-  //     "https://images.unsplash.com/photo-1590362891991-f776e747a588",
-  //     "https://images.unsplash.com/photo-1601924579440-10c5c38a5bb1"
-  //   ]
-  // }
 
-  const reservations = [
-    {
-      client: "Alioune Fall",
-      debut: "10/01/2026",
-      fin: "12/01/2026",
-      statut: "Confirmée",
-      montant: "45 000 FCFA"
-    },
-    {
-      client: "Fatou Diop",
-      debut: "20/12/2025",
-      fin: "22/12/2025",
-      statut: "Terminée",
-      montant: "40 000 FCFA"
-    }
-  ]
+
 
   return (
     <div className="w-full min-h-screen bg-gradient-to-tr from-textColor to-green-800">
@@ -81,7 +37,7 @@ const DetailAnnonce = () => {
 
           <div>
             <h3 className="text-md font-semibold text-white">
-              {annonce.proprietaire.nom}
+              {annonce.proprietaire?.nom} 
             </h3>
             <div className="flex items-center gap-2 text-sm">
               <BsPinMap className="text-primary" />
@@ -115,7 +71,8 @@ const DetailAnnonce = () => {
           </div>
 
           {/* Infos principales */}
-          <div className="bg-neutral-900/40 rounded-xl p-6">
+          <div className="bg-neutral-900/40 rounded-xl p-6 flex flex-col sm:flex-row gap-5 justify-between">
+            <div className="">
             <h2 className="text-2xl font-bold text-white">
               {annonce.marque} {annonce.modele}
             </h2>
@@ -130,6 +87,13 @@ const DetailAnnonce = () => {
             >
               {annonce.disponible ? "Disponible" : "Indisponible"}
             </span>
+          </div>
+          <div className="max-sm:justify-end flex items-center gap-2 bg-green-600/10 backdrop:blur-lg rounded-md p-3 ">
+              <h2 className="text-xl sm:text-3xl font-bold text-white">
+               {annonce.tarif} 
+              </h2>
+             <p className='text-primary text-md '>cfa / jour</p>
+          </div>
           </div>
 
           {/* Caractéristiques */}
@@ -161,7 +125,7 @@ const DetailAnnonce = () => {
               <span>Vitesses</span>
             </div>
             <span className="text-white font-semibold">
-              {annonce.nombreDeVitesses}
+              {annonce.nombreDeVitesse}
             </span>
 
             <div className="flex items-center gap-2 text-neutral-300">
@@ -211,16 +175,16 @@ const DetailAnnonce = () => {
                 </tr>
               </thead>
               <tbody>
-                {reservations.map((r, i) => (
+                {annonce.historique.map((r, i) => (
                   <tr
                     key={i}
                     className="border-b border-neutral-800 text-center"
                   >
-                    <td className="py-2">{r.client}</td>
+                    <td className="py-2">kira</td>
                     <td>{r.debut}</td>
                     <td>{r.fin}</td>
-                    <td className="text-green-500">{r.statut}</td>
-                    <td className="font-semibold">{r.montant}</td>
+                    <td className="text-green-500">{r.status}</td>
+                    <td className="font-semibold">{r.montant} cfa</td>
                   </tr>
                 ))}
               </tbody>
@@ -239,12 +203,20 @@ const DetailAnnonce = () => {
             Choisissez vos dates et confirmez la réservation.
           </p>
 
-          <Button className="w-full">
+          <Button className="w-full" onClick={() => setshowReservation(true) }>
             Réserver maintenant
           </Button>
         </div>
 
       </Conteneur>
+      
+      {
+        showReservation &&  <ReservationForm show={setshowReservation}  />
+      }
+    
+  
+      
+     
     </div>
   )
 }
