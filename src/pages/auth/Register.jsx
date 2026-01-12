@@ -28,58 +28,72 @@ const Register = () => {
   const navigate = useNavigate();
 
 
-   const handleRegister = async (e) => {
-      
-   e.preventDefault();
-   setLoading(true);
+const handleRegister = async (e) => {
+  e.preventDefault();
+  setLoading(true);
 
-   if(!prenom || !nom || !email || !password || !confirmPassword) {
-      setLoading(false);
-      toast.error('Veuillez remplir tous les champs');
-      return;
-   }
+  if (!prenom || !nom || !email || !password || !confirmPassword) {
+    toast.error("Veuillez remplir tous les champs");
+    setLoading(false);
+    return;
+  }
 
-   if(password.length <= 5){
-      setLoading(false);
-      toast.error("Au minimum 6 caractéres pour le mots de passe");
-      return;
-   }
+  if (password.length < 6) {
+    toast.error("Minimum 6 caractères pour le mot de passe");
+    setLoading(false);
+    return;
+  }
 
-   if(password !== confirmPassword) {
-      setLoading(false);
-      toast.error("Les deux mots de passe ne correspondent pas");
-      return;
-   }
+  if (password !== confirmPassword) {
+    toast.error("Les mots de passe ne correspondent pas");
+    setLoading(false);
+    return;
+  }
 
-     try {
-       const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-       );
+  try {
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
 
-       await setDoc(doc(db, "users", userCredential.user.uid), {
-          prenom,
-          nom,
-          adresse : "",
-          profil : "",
-          email,
-          role: "UTILISATEUR_STANDARD",
-          createdAt: serverTimestamp(),
-       });
-       
-       toast.success("Inscription réussie ✔️")
-       navigate("/connexion");
-       console.log("utilisateur créé :", userCredential.user);
-     } catch(error) {
-       console.log(error.code, error.message);
-       toast.error(error.message);
-     } finally {
-        setLoading(false);
-     }
+    const uid = userCredential.user.uid;
+
    
+    await setDoc(doc(db, "users", uid), {
+      prenom,
+      nom,
+      adresse: "",
+      profil: "",
+      email,
+      role: "UTILISATEUR_STANDARD",
+      createdAt: serverTimestamp(),
+    });
 
-   }
+    await setDoc(doc(db, "publicUsers", uid), {
+      prenom,
+      nom,
+      profil: "",
+      role: "UTILISATEUR_STANDARD",
+    });
+
+    toast.success("Inscription réussie ✔️");
+    navigate("/connexion");
+
+  } catch (error) {
+    console.error(error);
+
+    if (error.code === "auth/email-already-in-use") {
+      toast.error("Cet email est déjà utilisé");
+    } else if (error.code === "auth/invalid-email") {
+      toast.error("Email invalide");
+    } else {
+      toast.error("Erreur lors de l'inscription");
+    }
+  } finally {
+    setLoading(false);
+  }
+};
 
 
   return (

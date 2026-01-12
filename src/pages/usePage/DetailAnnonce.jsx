@@ -17,11 +17,15 @@ const DetailAnnonce = () => {
 
 
   const { annonces} = useCarContext()
+
+  if(!annonces.length) {
+    return <div>Chargement...</div>
+  }
   const annonce = annonces.find((v) => v.id == id  );
 
+  console.log("ANNONCE DETAIL :", annonce);
+
   
-
-
 
 
 
@@ -211,7 +215,7 @@ const DetailAnnonce = () => {
       </Conteneur>
       
       {
-        showReservation &&  <ReservationForm show={setshowReservation}  />
+        showReservation &&  <ReservationForm show={setshowReservation} annonce={annonce} />
       }
     
   

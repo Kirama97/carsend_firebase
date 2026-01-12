@@ -1,101 +1,71 @@
-import React, { createContext, useContext , useState , useEffect } from 'react'
-import { collection , addDoc , getDocs , getDoc , doc , updateDoc , deleteDoc} from 'firebase/firestore'
-import {db } from  "../config/firebase-config"
+import React, { createContext, useContext, useState, useEffect } from "react";
+import { collection, getDocs, getDoc, doc } from "firebase/firestore";
+import { db } from "../config/firebase-config";
 
-const CarContext = createContext()
+const CarContext = createContext();
 
 const CarProvider = ({ children }) => {
+  const [annonces, setAnnonces] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const [annonces , setAnnonces] = useState([])
-  // const [proprietaire , setProprietaire] = useState("")
-  const [loading, setLoading] = useState(true)
-
-
-  const annonceCollection = collection(db, "annonce")
-
-
+  const annonceCollection = collection(db, "annonce");
 
   useEffect(() => {
-   
-         const fetchAnnonce = async () => {
+    const fetchAnnonce = async () => {
+      try {
+        const snapshot = await getDocs(annonceCollection);
 
-           try {
-              
-               const snapshot = await getDocs(annonceCollection);
-                
-               const annonceAvecProprietaire = await Promise.all(
+        const annoncesAvecProprietaire = await Promise.all(
+          snapshot.docs.map(async (annonceDoc) => {
+            const annonceData = annonceDoc.data();
 
-                    snapshot.docs.map(async (annonceDoc) => {
-                       const annonceData = annonceDoc.data()
+            let proprietaire = null;
 
-                       let proprietaire = null 
-                        if(annonceData.proprietaireId){
-                           const userSnap = await getDoc(
-                            doc(db, 'users',annonceData.proprietaireId)
-                           )
-                          proprietaire = userSnap.exists() ? userSnap.data() : null
-                        }
-                      return {
-                        id:annonceDoc.id,
-                        ...annonceData,
-                        proprietaire
-                      }
+            if (annonceData.proprietaireId) {
+              const userSnap = await getDoc(
+                doc(db, "publicUsers", annonceData.proprietaireId)
+              );
 
-                    })
-               )
-            
-                setAnnonces(annonceAvecProprietaire)
-           } catch (error) {
-              console.error("erreur chargement annonces :" , error)
-           }finally {
-             setLoading(false)
-           }
-           
-         }
-          
+              if (userSnap.exists()) {
+                proprietaire = userSnap.data();
+              }
+            }
 
-       fetchAnnonce()
+            return {
+              id: annonceDoc.id,
+              ...annonceData,
+              proprietaire,
+            };
+          })
+        );
 
+        setAnnonces(annoncesAvecProprietaire);
+      } catch (error) {
+        console.error("Erreur chargement annonces :", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAnnonce();
   }, []);
 
-  const reservationsExistantes = [
-  { debut: "2026-01-10", fin: "2026-01-12" },
-  { debut: "2026-01-18", fin: "2026-01-20" },
-]
+  console.log("ANNONCES :", annonces);
 
-console.log(annonces)
+  // utils dates
+  const toDate = (date) => new Date(date);
 
-  //  calcule date de reservaton et tarif 
+  const daysBetween = (debut, fin) => {
+    const diff = toDate(fin) - toDate(debut);
+    return diff > 0 ? diff / (1000 * 60 * 60 * 24) + 1 : 0;
+  };
 
-  //  convertire les date text en vrais date
-  const toDate = (date) => new Date(date)
-
-  const isDateReserved = (date) => {
-     return reservationsExistantes.some(r => {
-       return (
-         toDate(date) >= toDate(r.debut) && 
-         toDate(date) <= toDate(r.fin)
-       )
-     })
-  }
-
-  // la nombre de jour en ces deux date
-
-  const daysBetween = (debut , fin ) => {
-     const diff = toDate(fin) - toDate(debut)
-     return diff > 0 ? diff / (1000 * 60 * 60 * 24) + 1 : 0
-    //  1 jour = 1000 ms × 60 s × 60 min × 24 h
-
-  }
-
-  
   return (
-    <CarContext.Provider value={{ annonces  , isDateReserved , daysBetween }}>
+    <CarContext.Provider value={{ annonces, loading, daysBetween }}>
       {children}
     </CarContext.Provider>
-  )
-}
+  );
+};
 
-export const useCarContext = () => useContext(CarContext)
-
-export default CarProvider
+export const useCarContext = () => useContext(CarContext);
+export default CarProvider;
