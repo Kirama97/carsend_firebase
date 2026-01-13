@@ -14,19 +14,45 @@ const ReservationForm = ({show , annonce}) => {
     const [montantTotal , setMontantTotal] = useState(0)
     const [dateFin , setDateFin] = useState('')
     const [loading , setLoading] = useState(false)
+    const [error , setError] = useState('')
 
     console.log("user annonce :", user.uid);
 
     
-    useEffect(() => {
-      if (dateDebut && nombreJour > 0) {
-        const debut = new Date(dateDebut);
-        const fin = new Date(debut);
-        fin.setDate(debut.getDate() + parseInt(nombreJour)); 
+     useEffect(() => {
+
+       if(annonce && annonce?.tarif) {
+         setMontantTotal(nombreJour * annonce.tarif);
+       }
+
+     }, [nombreJour, annonce?.tarif]);  
+
+   
+   useEffect(() => {
+      if (!dateDebut) return;
+
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      const selectedDate = new Date(dateDebut);
+
+      if (selectedDate <= today) {
+        setError("La date doit être supérieure à la date actuelle");
+        setDateDebut('');
+        return;
+      }else {
+        setError('');
+      }
+
+      if (nombreJour > 0) {
+        const fin = new Date(selectedDate);
+        fin.setDate(fin.getDate() + Number(nombreJour));
         setDateFin(fin.toISOString().split("T")[0]);
       }
     }, [dateDebut, nombreJour]);
 
+        
+  
 
     const handleSubmit = (e) => {
 
@@ -40,8 +66,16 @@ const ReservationForm = ({show , annonce}) => {
         jour: nombreJour,
         montant :montantTotal,
         status : 'en attente',
-        userId: user.uid 
+        userId: user.uid ,
+        proprietaireId : annonce.proprietaireId
       };
+
+      // console.log("Données de réservation :", reservationData);
+  
+    
+      setLoading(false);
+      show(false);
+      taost.success("Réservation soumise avec succès !");
 
       };
 
@@ -74,7 +108,7 @@ const ReservationForm = ({show , annonce}) => {
             </p>
       
             {/*  Form */}
-            <form className="space-y-5"  >
+            <form className="space-y-5" onSubmit={handleSubmit}> 
 
               {/* Date début */}
               <div className="flex flex-col gap-1">
@@ -85,8 +119,14 @@ const ReservationForm = ({show , annonce}) => {
                   type="date"
                   value={dateDebut}
                   onChange={(e) => setDateDebut(e.target.value)}
-                  className="border rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary outline-none"
+                  className={`border rounded-lg px-4 py-2 outline-none
+                      focus:ring-2
+                      ${error 
+                        ? "border-red-500 focus:ring-red-500" 
+                        : "border-neutral-300 focus:ring-primary"}
+                    `}
                 />
+                {error && <span className='text-red-600 text-sm bg-red-100 p-2 rounded-md mt-2'>{error}</span>}
               </div>
 
               {/* Date fin */}
@@ -99,7 +139,7 @@ const ReservationForm = ({show , annonce}) => {
                   min={1}
                   max={5}
                   value={nombreJour}
-                  onChange={(e) => setNombreJour(e.target.value)}
+                  onChange={(e) => setNombreJour(Number(e.target.value))}
                   type="number"
                   placeholder='Nombre de jour Max 5'
                   className="border rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary outline-none"
@@ -118,7 +158,7 @@ const ReservationForm = ({show , annonce}) => {
                 </div>
                   {
                   dateFin && (
-                    <div className="mt-2 text-xs flex flex-col  gap-3  bg-green-100 p-3 rounded-lg  text-sm text-neutral-700">
+                    <div className="mt-2 text-sm flex flex-col  gap-3  bg-green-100 p-3 rounded-lg  text-sm text-neutral-700">
                       <span>Debut de la réservation le : <span className='text-green-600 text-md font-bold'>{dateDebut}</span></span>
                       <span>Fin de la réservation le : <span className='text-red-600 text-md font-bold'>{dateFin}</span></span>
                     </div>
@@ -126,7 +166,7 @@ const ReservationForm = ({show , annonce}) => {
                 }
                 <div className="flex justify-between border-t pt-2 mt-2 font-bold">
                   <span>Total</span>
-                  <span className="text-primary">{annonce.tarif * nombreJour} FCFA</span>
+                  <span className="text-primary">{montantTotal} FCFA</span>
                 </div>
               
 
@@ -134,8 +174,12 @@ const ReservationForm = ({show , annonce}) => {
 
               {/*  Actions */}
               <div className="flex gap-4 pt-2">
-                <Button type="submit" className="w-full">
-                  Confirmer la réservation
+             <Button
+                  disabled={loading || nombreJour <= 0 || !dateDebut}
+                  type="submit"
+                  className="w-full"
+                >
+                  {loading ? "Chargement..." : "Confirmer la réservation"}
                 </Button>
                 <Button
                   type="button"
@@ -147,9 +191,17 @@ const ReservationForm = ({show , annonce}) => {
               </div>
 
             </form>
-          </motion.div>
+          </motion.div> 
+
+                
+          
         </div>
+       
+          
+        
   )
-}
+
+ } 
+
 
 export default ReservationForm
